@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Data from './data'
+import Personinfo from './Personinfo';
 import './App.css';
 
 function App() {
+  const [state, setState] = useState(Data)
+  const RemoveAll= ()=>{
+    setState([])
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="section">
+      <div className='container'>
+        <h3>Birthday Reminder {state.length}</h3>
+        <div>
+       {state.map((item)=>{
+        return  <Personinfo
+        name={item.name} 
+        age={item.age}
+        image={item.image}
+        />
+       })}
+        </div>
+        <button onClick={RemoveAll}>Clear All</button>
+        </div>
     </div>
   );
 }
